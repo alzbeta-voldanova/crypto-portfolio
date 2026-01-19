@@ -17,8 +17,11 @@ public class CryptoController {
     }
 
     @GetMapping("/cryptos")
-    public List<Crypto> getAllCryptos() {
-        return cryptoService.getAll();
+    public List<Crypto> getAllCryptos(@RequestParam(required = false) String sort) {
+        if (sort == null) {
+            return cryptoService.getAll();
+        }
+        return cryptoService.getAllSorted(sort);
     }
 
     @PostMapping("/cryptos")
