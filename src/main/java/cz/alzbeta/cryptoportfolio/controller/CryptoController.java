@@ -2,6 +2,7 @@ package cz.alzbeta.cryptoportfolio.controller;
 
 import cz.alzbeta.cryptoportfolio.model.Crypto;
 import cz.alzbeta.cryptoportfolio.service.CryptoService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,5 +33,19 @@ public class CryptoController {
     @GetMapping("/cryptos/{id}")
     public Crypto getCryptoById(@PathVariable Integer id) {
         return cryptoService.getById(id);
+    }
+
+    @PutMapping("/cryptos/{id}")
+    public ResponseEntity<Void> updateCrypto(@PathVariable Integer id, @RequestBody Crypto crypto) {
+        boolean updated = cryptoService.updateCrypto(id, crypto);
+        if (updated) {
+            return ResponseEntity.noContent().build(); // 204
+        }
+        return ResponseEntity.notFound().build(); // 404
+    }
+
+    @GetMapping("/portfolio-value")
+    public double getPortfolioValue() {
+        return cryptoService.getPortfolioValue();
     }
 }

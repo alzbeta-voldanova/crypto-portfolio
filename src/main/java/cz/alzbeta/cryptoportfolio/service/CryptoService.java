@@ -50,5 +50,26 @@ public class CryptoService {
         return null;
     }
 
+    public boolean updateCrypto(Integer id, Crypto updatedCrypto) {
+        for (Crypto crypto : cryptos) {
+            if (crypto.getId().equals(id)) {
+                crypto.setName(updatedCrypto.getName());
+                crypto.setSymbol(updatedCrypto.getSymbol());
+                crypto.setPrice(updatedCrypto.getPrice());
+                crypto.setQuantity(updatedCrypto.getQuantity());
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public double getPortfolioValue() {
+        double total = 0.0;
+        for (Crypto crypto : cryptos) {
+            total += crypto.getPrice() * crypto.getQuantity();
+        }
+        return total;
+    }
+
 
 }
