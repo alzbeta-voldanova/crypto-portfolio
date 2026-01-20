@@ -12,8 +12,14 @@ public class CryptoService {
 
     private final List<Crypto> cryptos = new ArrayList<>();
 
-    public void addCrypto(Crypto crypto) {
+    public boolean addCrypto(Crypto crypto) {
+        for (Crypto existing : cryptos) {
+            if (existing.getId().equals(crypto.getId())) {
+                return false; // id už existuje
+            }
+        }
         cryptos.add(crypto);
+        return true;
     }
 
     public List<Crypto> getAll() {

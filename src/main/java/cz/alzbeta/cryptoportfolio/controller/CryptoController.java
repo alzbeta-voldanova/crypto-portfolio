@@ -26,8 +26,12 @@ public class CryptoController {
     }
 
     @PostMapping("/cryptos")
-    public void addCrypto(@RequestBody Crypto crypto) {
-        cryptoService.addCrypto(crypto);
+    public ResponseEntity<Void> addCrypto(@RequestBody Crypto crypto) {
+        boolean added = cryptoService.addCrypto(crypto);
+        if (added) {
+            return ResponseEntity.status(201).build(); // Created
+        }
+        return ResponseEntity.status(409).build(); // Conflict – duplicitní ID
     }
 
     @GetMapping("/cryptos/{id}")
