@@ -76,3 +76,12 @@ ArrayList<Crypto>
 | GET | `/cryptos/{id}` | Detail kryptoměny |
 | PUT | `/cryptos/{id}` | Aktualizace kryptoměny |
 | GET | `/portfolio-value` | Celková hodnota portfolia |
+
+---
+
+## Testování
+
+- Testovací data (ukázky JSON):
+  - `src/test/resources/cryptos-test-data.json`
+- Postman kolekce:
+  - `postman/crypto-portfolio.postman_collection.json`
