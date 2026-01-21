@@ -35,8 +35,12 @@ public class CryptoController {
     }
 
     @GetMapping("/cryptos/{id}")
-    public Crypto getCryptoById(@PathVariable Integer id) {
-        return cryptoService.getById(id);
+    public ResponseEntity<Crypto> getCryptoById(@PathVariable Integer id) {
+        Crypto crypto = cryptoService.getById(id);
+        if (crypto == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(crypto);
     }
 
     @PutMapping("/cryptos/{id}")
